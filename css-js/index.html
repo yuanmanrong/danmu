@@ -4,9 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>css+js弹幕的实现</title>
+    <link type="text/css" rel="stylesheet"  href="./index.css">
 </head>
 <body>
-    
+    <div class="danmu">
+        <div id="danmu-box" class="danmu-box">
+            <span class="danmu-item">我是一条弹幕</span>
+        </div>
+        <div class="danmu-send">
+            <input id="danu-ipt" class="danu-ipt" type="text" value=""/>
+            <button class="danmu-btn" onclick=send()>发送</button>
+        </div>
+    </div>
+    <script>
+        let danmuBox = document.getElementById("danmu-box");  // 获取弹幕区域
+        let boxWidth = danmuBox.offsetWidth; // 弹幕区域宽
+        let boxHeight = danmuBox.offsetHeight; // 弹幕区域高
+        let barrageList = ["测试数据","啦啦啦啦","hhhhhhhhh","?????"]; // 所有弹幕内容
+        
+        // css动画
+        // setInterval(moveAnimation,200);
+
+        // js原生的属性设置
+        initBarrage();
+        setInterval(moveLeft,200);
+       
+
+        // 发送弹幕
+        function send() {
+            let iptVal = document.getElementById("danu-ipt");  // 获取发送的弹幕值
+            initDanmu(iptVal.value)
+            // initAnimationDanmu(iptVal.value)
+            iptVal.value = "";
+        }
+        
+        // 初始弹幕
+        function initBarrage() {
+          if(barrageList.length > 0) {
+            barrageList.forEach(item => {
+                initDanmu(item)
+            })
+           }
+        }
+
+         // 初始化弹幕----animation
+         function initAnimationDanmu(value) {
+            let span = document.createElement('span');
+            span.innerText = value;
+            span.style.visibility = "hidden"
+            danmuBox.appendChild(span);    
+         }
+         // animation方式
+         function moveAnimation() {
+           let spanList = danmuBox.children;
+           if (spanList.length > 0) {
+            Array.from(spanList).forEach((ele,index) => {
+                ele.className = "danmu-item"; 
+            })
+           }
+         }
+
+
+        // 初始化弹幕的属性----left
+        function initDanmu(value) {
+            let span = document.createElement('span');
+            span.innerText = value;
+            danmuBox.appendChild(span);
+            span.style.width = "fit-content";
+            let spanWidth = span.clientWidth;
+            let spanHeight = span.clientHeight;
+            span.style.position = "absolute";
+            span.style.left = boxWidth + 'px' // 弹幕的初始位置
+            span.style.top = Math.random() * (boxHeight - spanHeight) + 'px'; // 随机的高度
+            span.speed = Math.random() * 20 + 5; // 5-10的随机速度范围
+        }
+        // 使用改变left的方式移动
+        function moveLeft() {
+           spanList = danmuBox.children;
+           if (spanList.length > 0) {
+               Array.from(spanList).forEach((ele,index) => {
+                   // 移动到可视区域外
+                   if(parseInt(ele.style.left) - ele.speed < -ele.offsetWidth) {
+                    ele.style.display = "none";
+                   } else {
+                    ele.style.left = parseInt(ele.style.left) - ele.speed + 'px';
+                   }
+               })
+           }
+        }
+    </script>
 </body>
 </html>

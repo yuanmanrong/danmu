@@ -1,0 +1,42 @@
+.danmu {
+  width: 100%;
+  padding: 40px;
+}
+.danmu-box {
+  position: relative;
+  width: 80%;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+.danmu-send{
+  width: 80%;
+  height: 50px;
+  margin: 0 auto;
+  display: flex;
+}
+.danu-ipt {
+    width: 80%;
+}
+.danmu-btn {
+    width: 20%;
+}
+
+.danmu-item{
+    position: absolute;
+    width: fit-content;
+    animation: barrage 5s linear 0s;
+}
+
+@keyframes barrage {
+    from {
+      left: 100%; 
+      transform: translateX(0);
+      visibility: visible;
+    }
+    to {
+       left: 0;
+       transform: translateX(-100%);
+       visibility: hidden;
+    }
+}
