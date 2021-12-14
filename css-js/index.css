@@ -7,7 +7,9 @@
   width: 80%;
   height: 400px;
   margin: 0 auto;
+  background: white;
   border: 1px solid black;
+  overflow: hidden;
 }
 .danmu-send{
   width: 80%;
@@ -20,23 +22,40 @@
 }
 .danmu-btn {
     width: 20%;
+    /* left: 700px; */
+    /* transform: translateX(-200px); */
+    /* transition: transform 0s linear 0s; */
 }
 
 .danmu-item{
     position: absolute;
     width: fit-content;
-    animation: barrage 5s linear 0s;
+    visibility: hidden;
+    /* animation: barrage 10s linear 0s; */
+    animation: barrage-left 10s linear 0s;
 }
 
+/* 改变left的动画 */
+@keyframes barrage-left {
+  0% {
+    left: 100%;
+    transform: translateX(0);
+    visibility: visible;
+  }
+  100% {
+     left: 0;
+     transform: translateX(-100%);
+     visibility: hidden;
+  }
+}
+/* translate3d动画 */
 @keyframes barrage {
-    from {
-      left: 100%; 
-      transform: translateX(0);
+    0% {
+      transform: translate3d(100vw,0,0);
       visibility: visible;
     }
-    to {
-       left: 0;
-       transform: translateX(-100%);
+    100% {
+       transform: translate3d(-100%,0,0);
        visibility: hidden;
     }
 }

@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="danmu">
-        <div id="danmu-box" class="danmu-box">
-            <span class="danmu-item">我是一条弹幕</span>
-        </div>
+            <div id="danmu-box" class="danmu-box">
+                <span id="danmu-item" class="danmu-item">我是一条测试弹幕</span>
+            </div>
         <div class="danmu-send">
             <input id="danu-ipt" class="danu-ipt" type="text" value=""/>
             <button class="danmu-btn" onclick=send()>发送</button>
@@ -21,56 +21,41 @@
         let danmuBox = document.getElementById("danmu-box");  // 获取弹幕区域
         let boxWidth = danmuBox.offsetWidth; // 弹幕区域宽
         let boxHeight = danmuBox.offsetHeight; // 弹幕区域高
-        let barrageList = ["测试数据","啦啦啦啦","hhhhhhhhh","?????"]; // 所有弹幕内容
-        
-        // css动画
-        // setInterval(moveAnimation,200);
+        let barrageList = ["测试数据"]; // 所有弹幕内容
+        let danmuItem = document.getElementById("danmu-item");
+        let left = 0
 
-        // js原生的属性设置
-        initBarrage();
-        setInterval(moveLeft,200);
+        // 初始化弹幕
+        // initBarrage();
+        // setInterval(moveLeft,200);
        
 
         // 发送弹幕
         function send() {
             let iptVal = document.getElementById("danu-ipt");  // 获取发送的弹幕值
             initDanmu(iptVal.value)
-            // initAnimationDanmu(iptVal.value)
             iptVal.value = "";
         }
         
         // 初始弹幕
         function initBarrage() {
-          if(barrageList.length > 0) {
+         if(barrageList.length > 0) {
+            let frag = document.createDocumentFragment();
             barrageList.forEach(item => {
                 initDanmu(item)
             })
            }
+        // danmuItem.style.transform = `translateX(${left}px)`
+        // left = left - 10
+        // console.log( danmuItem.style.transform,'-----')
         }
-
-         // 初始化弹幕----animation
-         function initAnimationDanmu(value) {
-            let span = document.createElement('span');
-            span.innerText = value;
-            span.style.visibility = "hidden"
-            danmuBox.appendChild(span);    
-         }
-         // animation方式
-         function moveAnimation() {
-           let spanList = danmuBox.children;
-           if (spanList.length > 0) {
-            Array.from(spanList).forEach((ele,index) => {
-                ele.className = "danmu-item"; 
-            })
-           }
-         }
-
 
         // 初始化弹幕的属性----left
         function initDanmu(value) {
             let span = document.createElement('span');
             span.innerText = value;
-            danmuBox.appendChild(span);
+           // span.className = "danmu-item"
+           danmuBox.appendChild(span);
             span.style.width = "fit-content";
             let spanWidth = span.clientWidth;
             let spanHeight = span.clientHeight;
