@@ -1,24 +1,16 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { Component } from "react"
+import { BrowserRouter, Route } from "react-router-dom"
 import './App.css'
-import CanvasBarrage from "./CanvasBarrage/CanvasBarrage"
+import CanvasTest from "./CanvasTest"
+import BiliBarrage from "./BiliBarrage/BiliBarrage"
 
 class App extends Component<any, any>{
   render(): React.ReactNode {
     return (
-      <BrowserRouter>
-        <Route
-          path={"/"}
-        />
-        <Route
-          path={"/test1"}
-          component={CanvasBarrage}
-        />
-        <Route
-          path={"/test2"}
-          component={CanvasBarrage}
-        />
-      </BrowserRouter>
+      <div>
+        {/* <CanvasTest></CanvasTest> */}
+        <BiliBarrage></BiliBarrage>
+      </div>
     )
   }
 }

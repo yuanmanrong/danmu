@@ -119,7 +119,7 @@ export default class CanvasBullet extends React.Component<any, any> {
     handleSend = (val: any) => {
         if (!val) return
         let { canvasBarrage, color, speed, socket } = this.state
-        let video = document.getElementById("video")
+        let video: any = document.getElementById("video")
         console.log('color, speed ', color, speed)
         let item = {
             value: val,
