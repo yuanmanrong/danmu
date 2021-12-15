@@ -1,0 +1,33 @@
+.barrage {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.barrage-video, .barrage-canvas {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.barrage-send{
+  position: absolute;
+  width: 800px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.range{
+  width: 20%;
+  margin-right: 10px;
+}
+.color{
+  width: 8%;
+  margin-right: 10px;
+}
+.search{
+  width: 50%;
+}

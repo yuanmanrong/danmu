@@ -51,6 +51,7 @@ class CanvasBarrage {
         }
         Object.assign(this, defaultOptions, options) // 对象合并，将属性全部挂载到实例上
         this.isPaused = true // 是否暂停,默认暂停
+        this.isStop = true // 关闭弹幕，默认打开
         // 存放每条弹幕的内容
         this.barrages = this.data.map (obj => {
            return new Barrage(obj, this) // 初始化逐条弹幕
@@ -62,6 +63,9 @@ class CanvasBarrage {
     render() {
         // 先清空
         this.context.clearRect(0,0,this.canvas.width,this.canvas.height)
+        if(!this.isStop){
+            return
+        }
         // 再渲染弹幕
         this.renderBarrage()
         if(this.isPaused === false) {
@@ -91,13 +95,13 @@ class CanvasBarrage {
     }
 
     reset() {
-        this.ctx.context.clearRect(0,0,this.canvas.width,this.canvas.height)
+        this.context.clearRect(0,0,this.canvas.width,this.canvas.height)
         this.barrages.forEach(ele => {
             ele.flag = false // 还没有完成
             if (this.video.currentTime <= ele.time) {
                ele.isInited = false // 重新初始化一下  
             } else {
-               ele.isInited = true
+               ele.flag = true
             }
         })
     }
