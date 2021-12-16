@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiliBili</title>
+    <link type="text/css" rel="stylesheet"  href="./index.css">
+</head>
+<body>
+    <div class="danmu">
+        <video src="./cheers.mov" 
+               id="video" controls loop 
+               width="800px" 
+               height="450px"
+               onplay=handlePlay()
+               onpause=handlePause()
+               ></video>
+        <div id="danmu-box" class="danmu-box">
+            <!-- <span id="danmu-item" class="danmu-item">我是一条使用css动画的弹幕~~~~~</span> -->
+        </div>
+    </div>
+    <!-- <script src="./index.js"></script> -->
+    <script>
+       const video = document.getElementById('video')
+       const danmuBox = document.getElementById('danmu-box')
+       const videoWidth = video.width
+       const videoHeight = video.height
+       let left = videoWidth
+       let isStop = true
+       let timer = null
+       const SPEED = 120
+       let mockData = [
+           { value: "我是一条测试弹幕~~~~~",time: 0 },
+           { value: "测试",time: 3 },
+           { value: "我是一条测试弹幕~~~~~",time: 1 },
+           { value: "我是一条测试弹幕~~~~~",time: 3 },
+           { value: "我是一条测试弹幕~~~~~",time: 4 },
+           { value: "我是一条测试弹幕~~~~~",time: 5 },
+           { value: "我是一条测试弹幕~~~~~",time: 5 },
+           { value: "我是一条测试弹幕~~~~~",time: 4 },
+           { value: "我是一条测试弹幕~~~~~",time: 7 },
+           { value: "我是一条测试弹幕~~~~~",time: 9 },
+           { value: "我是一条测试弹幕~~~~~",time: 9 },
+           { value: "我是一条测试弹幕~~~~~",time: 11 },
+           { value: "我是一条测试弹幕~~~~~",time: 12 },
+           { value: "我是一条测试弹幕~~~~~",time: 13 },
+           { value: "我是一条测试弹幕~~~~~",time: 14 },
+           { value: "我是一条测试弹幕~~~~~",time: 15 },
+       ]
+       
+       
+       initBox()
+      
+       function handlePlay() {
+         timer = setInterval(move, 0);
+       }
+
+       function handlePause() {
+        clearInterval(timer)
+        spanList = danmuBox.children;
+            if (spanList.length > 0) {
+                Array.from(spanList).forEach((ele,index) => {
+                    let time = video.currentTime
+                    ele.style.transform = `translateX(${- (time - ele.time) * SPEED}px) translateY(0px) translateZ(0px)`;
+                    ele.style.transition = `-webkit-transform 0s linear 0s`;
+                    ele.stopLocation = videoWidth - (time - ele.time) * SPEED
+                })
+            }
+       }
+
+       function initBox() {
+            mockData.forEach(item => {
+                    initDanmu(item)
+            })
+       }
+
+
+       function initDanmu(item) {
+           let div = document.createElement('div');
+           div.innerText = item.value;
+           danmuBox.appendChild(div);
+           div.className = "danmu-item";
+           div.style.whiteSpace = "nowrap";
+           div.style.fontSize = "22px";
+           div.style.color = "white";
+           div.style.opacity = 0;
+           div.time = item.time
+           div.style.top = Math.random() * (videoHeight - div.clientHeight) + 'px'; // 随机的高度
+           div.style.left = left + "px";
+           div.stopLocation = videoWidth;
+           div.totalTime = ((videoWidth + div.clientWidth)/SPEED).toFixed(5)
+       }
+
+       function move() {
+        spanList = danmuBox.children;
+        if (spanList.length > 0) {
+            Array.from(spanList).forEach((ele,index) => {
+                    let time = video.currentTime
+                    if (ele.time <= time) {
+                    let min = ((ele.stopLocation + ele.clientWidth)/SPEED).toFixed(5)
+                    ele.style.transform = `translateX(${- (left + ele.clientWidth)}px) translateY(0px) translateZ(0px)`;
+                    ele.style.transition = `-webkit-transform ${min}s linear 0s`;
+                    ele.style.opacity = 0.8
+                   }
+                   if (time - ele.time >= ele.totalTime ) {
+                    ele.style.opacity = 0
+                   }
+            })
+        }
+   
+
+       }
+
+
+
+    </script>
+</body>
+</html>
