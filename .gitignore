@@ -1,0 +1,6 @@
+canvas/node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+bilibili/cheers.mov

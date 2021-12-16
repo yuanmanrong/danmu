@@ -1,0 +1,43 @@
+{
+  "name": "canvas-danmu",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --port 9528",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "lint": "eslint '{components,example}/**/*.{ts,tsx,js,jsx}'",
+    "lint_fix": "eslint '{components,example}/**/*.{ts,tsx,js,jsx}' --fix",
+    "server": "node ./server.js"
+  },
+  "dependencies": {
+    "antd": "^4.17.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^5.16.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router": "^6.1.1",
+    "react-router-dom": "^5.3.0",
+    "redis": "^3.1.2",
+    "redis-server": "^1.2.2",
+    "ws": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "@vitejs/plugin-react": "^1.0.0",
+    "eslint-config-alloy": "^4.4.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-standard": "^5.0.0",
+    "prettier": "^1.19.1",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  }
+}
